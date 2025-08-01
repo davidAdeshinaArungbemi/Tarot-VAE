@@ -43,8 +43,8 @@ This project started from the desire to **recreate and reimagine those forms**�
 ## 🗃 Dataset
 
 - ✅ **Sources**:  
-  - [Kaggle Tarot Dataset](INSERT_KAGGLE_LINK)  
-  - [Flickr Creative Commons](INSERT_FLICKR_LINK)  
+  - [Kaggle Tarot Dataset]([INSERT_KAGGLE_LINK](https://www.flickr.com/photos/sumadas-treasure-box/albums))  
+  - [Flickr Creative Commons]([INSERT_FLICKR_LINK](https://www.flickr.com/photos/sumadas-treasure-box/albums))  
 - 📐 **Preprocessing**:
   1. Resize & pad images to **256×256**
   2. Normalize to `[0,1]`
@@ -114,7 +114,8 @@ The architecture is composed of **three core components**:
 | Full Training Curve | Zoomed-In (First 50 Epochs) |
 |---------------------|-----------------------------|
 | ![loss](<img width="1200" height="800" alt="Training and Validation Lossses per Epoch" src="https://github.com/user-attachments/assets/fdd4c593-c008-42b2-92d2-3db374f82390" />
-) | ![zoom](<img width="1200" height="800" alt="Training and Validation Lossses per Epoch (Zoomed In)" src="https://github.com/user-attachments/assets/fba561a4-dc76-4f0c-bcd2-1408b0b2b17e" />) |
+) | ![zoom](<img width="1200" height="800" alt="Training and Validation Lossses per Epoch (Zoomed In)" src="https://github.com/user-attachments/assets/6230c47b-f6b7-4985-af96-c6d8cabd4fc2" />
+) |
 
 ---
 
