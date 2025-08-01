@@ -40,7 +40,7 @@ Unlike traditional VAEs that process entire images, this method enables:
 ## 🌈 Why Tarot Cards?
 
 While browsing Pinterest, I was fascinated by the ornate, symbolic, and colorful visual language of tarot cards.  
-This project started from the desire to **recreate and reimagine those forms**—through a machine that learns from the patterns and composition.
+This project started from the desire to **recreate and reimagine those forms**, through a machine that learns from the patterns and composition.
 
 ---
 
