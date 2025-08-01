@@ -1,4 +1,8 @@
-<img width="720" height="163" alt="random_gen" src="https://github.com/user-attachments/assets/5e72881b-f57d-417b-8350-833d184990ff" /><h1 align="center">
+<p align="center">
+  <img width="720" height="163" alt="random_gen" src="https://github.com/user-attachments/assets/5e72881b-f57d-417b-8350-833d184990ff" />
+</p>
+  
+  <h1 align="center">
   🔮 Patch-Based Variational Autoencoder for Tarot Card Generation
 </h1>
 
