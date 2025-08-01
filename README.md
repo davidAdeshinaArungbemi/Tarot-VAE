@@ -1,37 +1,121 @@
-# Patch-based Variational Autoencoder with Contextual Transformer Encoder
+<img width="720" height="163" alt="random_gen" src="https://github.com/user-attachments/assets/5e72881b-f57d-417b-8350-833d184990ff" /><h1 align="center">
+  🔮 Patch-Based Variational Autoencoder for Tarot Card Generation
+</h1>
 
-## Motivation
+<p align="center">
+  <b>Local generative modeling of tarot-style art with contextual VAE and transformer encoding</b><br/>
+  <i>Inspired by visual motifs on Pinterest, built for creative exploration and compactness</i>
+</p>
 
-This project began after encountering visually striking tarot card images on Pinterest. I aimed to build a generative model capable of capturing their complex visual patterns.
+<p align="center">
+  <img src="assets/banner_tarot.png" alt="Banner Image" width="700"/>
+</p>
 
-An initial attempt using a conventional VAE resulted in a model size of approximately 600 MB, which was impractical. To address this, I adopted a patch-based approach that breaks images into smaller patches processed with contextual embeddings, significantly reducing model size.
+<p align="center">
+  <a href="https://www.tensorflow.org/">
+    <img src="https://img.shields.io/badge/TensorFlow-2.12+-FF6F00?logo=tensorflow&logoColor=white" alt="TF Badge">
+  </a>
+  <img src="https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white" alt="Python Badge">
+  <img src="https://img.shields.io/badge/License-MIT-green" alt="License Badge">
+  <img src="https://img.shields.io/badge/Model%20Size-~15MB-lightgrey" alt="Model Size Badge">
+</p>
 
-## Data
+---
 
-- Tarot card images collected from [dataset link].
+## 🧠 Overview
 
-## Approach and Architecture
+This project presents a **lightweight patch-based Variational Autoencoder (VAE)** trained on tarot card-style artwork. The model learns local patterns by encoding and decoding **32×32 patches** with transformer-based context.  
 
-- **Patch-based processing:** Images are split into fixed-size patches (e.g., 32×32 pixels).
-- **Contextual embedding:** Each patch is embedded along with its neighboring patches within a sliding window context to provide spatial awareness.
-- **Variational Transformer Encoder:** Processes the sequence of patch embeddings with attention mechanisms to learn latent distributions.
-- **Patch Decoder:** Reconstructs patches from latent codes using transpose convolution layers.
-- **Model size:** Approximately 16 MB in `.keras` format, a substantial reduction from the initial model.
+Unlike traditional VAEs that process entire images, this method enables:
+- 🧩 **Modular learning** of parts of the image  
+- 🚀 **Smaller model size (~15MB)** vs original ~600MB  
+- ✨ **Random latent sampling** for visual creativity  
 
-### Core Components
+---
 
-```python
-# Patch extraction and embedding
-patches = tf.image.extract_patches(inputs, sizes=[1,H,W,1], strides=[1,H,W,1], padding='VALID')
-flat = tf.reshape(patches, [batch, num_patches, patch_features])
-embedded = patch_embed_layer(flat)
+## 🌈 Why Tarot Cards?
 
-# Context gathering: For each patch, gather embeddings of neighboring patches within context window
-context_embeddings = gather_context(embedded)
+While browsing Pinterest, I was fascinated by the ornate, symbolic, and colorful visual language of tarot cards.  
+This project started from the desire to **recreate and reimagine those forms**—through a machine that learns from the patterns and composition.
 
-# Variational Transformer Encoder forward pass
-z_mean, z_log_var = encoder(contextual_patch_embeddings)
-z = reparameterize(z_mean, z_log_var)
+---
 
-# Patch Decoder reconstructs patches from latent z
-reconstructed_patches = decoder(z)
+## 🗃 Dataset
+
+- ✅ **Sources**:  
+  - [Kaggle Tarot Dataset](INSERT_KAGGLE_LINK)  
+  - [Flickr Creative Commons](INSERT_FLICKR_LINK)  
+- 📐 **Preprocessing**:
+  1. Resize & pad images to **256×256**
+  2. Normalize to `[0,1]`
+  3. Extract non-overlapping **32×32 patches** (8×8 grid → 64 patches per image)
+
+---
+
+## 🧪 Model Architecture
+
+<p align="center">
+  <img src="assets/model_architecture.png" alt="Model Architecture" width="600"/>
+</p>
+
+The architecture is composed of **three core components**:
+
+### 1️⃣ Variational Transformer Encoder
+- Accepts **embedded patches + context patches**
+- Computes `z_mean` and `z_log_var` for VAE sampling
+- Uses:
+  - Multi-Head Attention for capturing spatial relationships
+  - Positional Embeddings to maintain patch order
+  - Feed-forward layers and LayerNorm for stability
+- Output: Latent vector `z` sampled via reparameterization trick
+
+---
+
+### 2️⃣ Patch Decoder
+- Accepts latent vector `z` and reconstructs a **32×32 patch**
+- Architecture: Dense → Reshape → 3× Conv2DTranspose → Sigmoid
+- Responsible for **learning local visual patterns** like shapes, colors, and borders
+
+---
+
+### 3️⃣ Chunked VAE System
+- Orchestrates the encoding/decoding of **full images** in patch form:
+  1. **Patch Extraction**: Split input into non-overlapping patches
+  2. **Patch Embedding**: Embed patches into a compact feature space
+  3. **Context Gathering**: Collect `context_n` previous patches for each new patch
+  4. **Encoding & Sampling**: Transformer encoder outputs latent vector `z`
+  5. **Patch Decoding**: Latent vector decoded back to patch
+  6. **Image Reconstruction**: Patches stitched back into a 256×256 image
+- Includes:
+  - KL-divergence loss with **warm-up scheduling**
+  - Mean Squared Error reconstruction loss
+
+---
+
+## 📊 Results
+
+### 🎯 Reconstruction Examples
+<p align="center">
+  <img width="719" height="288" alt="reconstructions" src="https://github.com/user-attachments/assets/bea43c04-b6b2-45f8-a38b-ffd852f340f9" />
+</p>
+
+---
+
+### 🌌 Random Latent Generations
+<p align="center">
+  <img width="720" height="163" alt="random_gen" src="https://github.com/user-attachments/assets/322716dc-4d79-4e61-8ee9-4cb86cb98d75" />
+</p>
+
+
+
+---
+
+### 📉 Training Curves
+| Full Training Curve | Zoomed-In (First 50 Epochs) |
+|---------------------|-----------------------------|
+| ![loss](<img width="1200" height="800" alt="Training and Validation Lossses per Epoch" src="https://github.com/user-attachments/assets/fdd4c593-c008-42b2-92d2-3db374f82390" />
+) | ![zoom](<img width="1200" height="800" alt="Training and Validation Lossses per Epoch (Zoomed In)" src="https://github.com/user-attachments/assets/fba561a4-dc76-4f0c-bcd2-1408b0b2b17e" />) |
+
+---
+
+
