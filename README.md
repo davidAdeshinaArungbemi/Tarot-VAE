@@ -111,11 +111,10 @@ The architecture is composed of **three core components**:
 ---
 
 ### 📉 Training Curves
-| Full Training Curve | Zoomed-In (First 50 Epochs) |
-|---------------------|-----------------------------|
-| ![loss](<img width="1200" height="800" alt="Training and Validation Lossses per Epoch" src="https://github.com/user-attachments/assets/fdd4c593-c008-42b2-92d2-3db374f82390" />
-) | ![zoom](<img width="1200" height="800" alt="Training and Validation Lossses per Epoch (Zoomed In)" src="https://github.com/user-attachments/assets/6230c47b-f6b7-4985-af96-c6d8cabd4fc2" />
-) |
+| Full Training Curve | Zoomed-In (Y-Axis) |
+|---------------------|----------------------------|
+| ![loss](https://github.com/user-attachments/assets/fdd4c593-c008-42b2-92d2-3db374f82390) | ![zoom](https://github.com/user-attachments/assets/6230c47b-f6b7-4985-af96-c6d8cabd4fc2) |
+
 
 ---
 
