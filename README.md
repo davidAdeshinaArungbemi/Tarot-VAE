@@ -114,7 +114,8 @@ While the patch-based VAE concept was promising, the outputs reveal its limitati
 - Outputs appear as **disjoint patches of color**, without card-wide understanding.
 
 <p align="center">
-  <img src="[assets/random_gen.png](https://github.com/user-attachments/assets/322716dc-4d79-4e61-8ee9-4cb86cb98d75)" width="700"/>
+  <img width="720" height="163" alt="random_gen" src="https://github.com/user-attachments/assets/55eff11d-a305-4d8a-93dd-a7f48108928d" />
+
   <br><i>Random latent generations – mostly texture-like patches without global structure</i>
 </p>
 
@@ -125,7 +126,8 @@ While the patch-based VAE concept was promising, the outputs reveal its limitati
 - The model learned **local colors and blobs**, but could not capture symbols or card layouts.
 
 <p align="center">
-  <img src="[assets/reconstructions.png](https://github.com/user-attachments/assets/322716dc-4d79-4e61-8ee9-4cb86cb98d75)" width="700"/>
+  <img width="719" height="288" alt="reconstructions" src="https://github.com/user-attachments/assets/edf48871-b177-402f-9794-b5929009b486" />
+
   <br><i>Top: Original tarot cards | Bottom: Reconstructions with clear patch seams</i>
 </p>
 
