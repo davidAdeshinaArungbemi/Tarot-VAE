@@ -94,20 +94,6 @@ The architecture is composed of **three core components**:
 
 ## 📊 Results
 
-### 🎯 Reconstruction Examples
-<p align="center">
-  <img width="719" height="288" alt="reconstructions" src="https://github.com/user-attachments/assets/bea43c04-b6b2-45f8-a38b-ffd852f340f9" />
-</p>
-
----
-
-### 🌌 Random Latent Generations
-<p align="center">
-  <img width="720" height="163" alt="random_gen" src="https://github.com/user-attachments/assets/322716dc-4d79-4e61-8ee9-4cb86cb98d75" />
-</p>
-
-
-
 ---
 
 ### 📉 Training Curves
@@ -117,5 +103,56 @@ The architecture is composed of **three core components**:
 
 
 ---
+
+
+## ❌ Why It Failed
+
+While the patch-based VAE concept was promising, the outputs reveal its limitations.
+
+### 1️⃣ Random Latent Sampling
+- The model generates local textures but **fails to produce coherent card structures**.
+- Outputs appear as **disjoint patches of color**, without card-wide understanding.
+
+<p align="center">
+  <img src="[assets/random_gen.png](https://github.com/user-attachments/assets/322716dc-4d79-4e61-8ee9-4cb86cb98d75)" width="700"/>
+  <br><i>Random latent generations – mostly texture-like patches without global structure</i>
+</p>
+
+---
+
+### 2️⃣ Image Reconstruction
+- Reconstructed cards show **visible patch boundaries** and **loss of global shapes**.
+- The model learned **local colors and blobs**, but could not capture symbols or card layouts.
+
+<p align="center">
+  <img src="[assets/reconstructions.png](https://github.com/user-attachments/assets/322716dc-4d79-4e61-8ee9-4cb86cb98d75)" width="700"/>
+  <br><i>Top: Original tarot cards | Bottom: Reconstructions with clear patch seams</i>
+</p>
+
+---
+
+### 🔹 Observed Limitations
+1. **Patch Independence** – Each patch was learned in relative isolation, reducing global consistency.  
+2. **Limited Context** – Using only a small sliding window of previous patches was not enough for card-wide patterns.  
+3. **KL Term Effect** – The latent space may have favored noise over structured features, leading to texture-only generations.
+
+---
+
+### 💡 Lessons and Future Directions
+Future experiments could explore ways to improve **global coherence**:
+
+- **U-Net Style Global Pathway**  
+  A downsample-then-upsample route with skip connections could give the model a sense of the **entire card layout** while still learning local patch details.
+
+- **Hierarchical VAE**  
+  Introducing multiple levels of latent variables allows the **top level** to capture **overall card structure**, while lower levels handle **textures and colors**.
+
+- **Global Attention**  
+  Letting each patch attend to **all patches**, rather than just neighbors, could encourage **long-range visual consistency**.
+
+---
+
+> *These insights show that while patch-based VAEs can capture textures, global structure benefits from architectural elements that connect local and global information.*
+
 
 
