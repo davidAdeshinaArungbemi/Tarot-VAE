@@ -28,7 +28,7 @@ This project presents a **lightweight patch-based Variational Autoencoder (VAE)*
 
 Unlike traditional VAEs that process entire images, this method enables:
 - 🧩 **Modular learning** of parts of the image  
-- 🚀 **Smaller model size (~15MB)** vs original ~600MB  
+- 🚀 **Smaller model size (~16MB)** vs original ~600MB  
 - ✨ **Random latent sampling** for visual creativity  
 
 ---
