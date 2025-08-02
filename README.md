@@ -111,6 +111,8 @@ The architecture is composed of **three core components**:
 
 ## ❌ Why It Failed
 
+First off, not enough data, had 200+ samples, which is too small for patch based VAE.
+
 While the patch-based VAE concept was promising, the outputs reveal its limitations.
 
 ### 1️⃣ Random Latent Sampling
